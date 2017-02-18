@@ -1,0 +1,11 @@
+[Unit]
+Description=hue
+After=multi-user.target
+
+[Service]
+Type=idle
+#EDIT THE PATH TO YOUR FILE
+ExecStart=/usr/bin/python3 /home/pi/automation/hue.py
+
+[Install]
+WantedBy=multi-user.target

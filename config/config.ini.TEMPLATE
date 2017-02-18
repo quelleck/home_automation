@@ -1,0 +1,24 @@
+[HUE]
+HueApiKey =
+Users =
+Devices =
+Rooms =
+
+
+[WEMO]
+On =
+Off =
+IFTTTApiKey =
+
+#EXAMPLE VALUES
+#[DEFAULT]
+#HueApiKey = MyHueBridgeUserKey
+#Users = John, Sally, Fred
+#Devices = AA:BB:CC:DD:EE:FF AA:BB:CC:DD:EE:FF AA:BB:CC:DD:EE:FF
+Rooms = Living Room, Bedroom | Hallway, Living Room, Bedroom | Kitchen, Office, Bedroom
+
+
+#[WEMO]
+#On = my_ifttt_applet
+#Off = my_ifttt_applet
+#IFTTTApiKey = MyIFTTTApiKey
