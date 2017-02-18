@@ -1,6 +1,9 @@
-# Wemo Insight Control
+#! /usr/bin/env python3
+# Wemo Control
+# Ethan Seyl 2017
 
 from pathlib import Path
+import logging.config
 import configparser
 import subprocess
 import requests
@@ -25,7 +28,7 @@ def ping_cam():
         stderr=subprocess.STDOUT)
     output = (output.stdout.read()).decode('utf-8')
     print("[ping_cam] {}".format(output))
-    if 'Unreachable' in output:
+    if '100.0% packet loss' in output or 'Unreachable' in output:
         return True
     else:
         return False
@@ -34,22 +37,23 @@ def ping_cam():
 def ifttt_trigger(value):
     requests.post('https://maker.ifttt.com/trigger/{}/with/key/{}'.format(
         value, config['WEMO']['IFTTTApiKey']))
-    print("[ifttt_trigger] Recipe '{}' triggered".format(value))
+    logging.info("[wemo][ifttt_trigger] Recipe '{}' triggered".format(value))
     exit
 
 
 def main():
     if check_for_user():
         if ping_cam():
-            print("[main] Already off.")
+            logging.debug("[wemo][main] Already off.")
         else:
             ifttt_trigger('wemo_off')
     else:
         if ping_cam():
             ifttt_trigger('wemo_on')
         else:
-            print("[main] Already on.")
+            logging.debug("[wemo][main] Already on.")
 
 
 if __name__ == '__main__':
+    logging.config.fileConfig('{}/config/logging.conf'.format(dir_path))
     main()

@@ -1,18 +1,19 @@
 #! /usr/bin/env python3
 # Create files for users who are home
-#
-import subprocess
-import configparser
-import os
-from time import sleep
+# Ethan Seyl 2017
+
 from pathlib import Path
+from time import sleep
+import configparser
+import subprocess
+import os
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
 config = configparser.ConfigParser()
 config.read('{}/config/config.ini'.format(dir_path))
 
 users = dict(
-    zip((config['DEFAULT']['Users'].split(', ')), (config['DEFAULT']['Devices']
+    zip((config['DEFAULT']['Users'].split(', ')), (config['HUE']['Devices']
                                                    ).split(', ')))
 
 

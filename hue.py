@@ -1,6 +1,6 @@
 #! /usr/bin/env python3
-# RhytHUEm
-# Ethan Seyl 2016
+# Hue Lights Control
+# Ethan Seyl 2017
 
 from pathlib import Path
 from time import sleep
@@ -17,9 +17,9 @@ config.read('{}/config/config.ini'.format(dir_path))
 bridge_ip = requests.get('https://www.meethue.com/api/nupnp').json()[0][
     'internalipaddress']
 data = requests.get('http://{}/api/{}/groups/'.format(bridge_ip, config[
-    'DEFAULT']['HueApiKey'])).json()
+    'HUE']['HueApiKey'])).json()
 users = config['DEFAULT']['Users'].split(', ')
-rooms_list = config['DEFAULT']['Rooms'].split(' | ')
+rooms_list = config['HUE']['Rooms'].split(' | ')
 room_numbers = list(data.keys())
 print("ROOM NUMBERS {}".format(room_numbers))
 room_names_list = []
@@ -109,7 +109,7 @@ def groups_put_request(payload, room_number):
     try:
         requests.put(
             'http://{}/api/{}/groups/{}/action'.format(
-                bridge_ip, config['DEFAULT']['HueApiKey'], room_number),
+                bridge_ip, config['HUE']['HueApiKey'], room_number),
             data=json.dumps(payload))
         sleep(1)
     except Exception as e:
@@ -118,7 +118,7 @@ def groups_put_request(payload, room_number):
 
 def groups_get_request(room_number):
     r = requests.get('http://{}/api/{}/groups/{}'.format(bridge_ip, config[
-        'DEFAULT']['HueApiKey'], room_number))
+        'HUE']['HueApiKey'], room_number))
     sleep(1)
     return r.json()
 
@@ -128,7 +128,7 @@ def blink_ready():
         print("BLINK ROOM: {}".format(room))
         groups_put_request({'alert': 'select'}, room)
         groups_put_request({'alert': 'none'}, room)
-    logging.info("[do][blink_ready] Lights are ready")
+    logging.info("[hue][blink_ready] Lights are ready")
 
 
 def turn_off_or_on(room_numbers, off_on):
