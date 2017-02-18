@@ -93,7 +93,7 @@ def turn_on_room(room):
     ct_bri = {'on': True, 'bri': 254, 'ct': 231}
     requests.put(
         'http://{}/api/{}/groups/{}/action'.format(
-            bridge_ip, config['DEFAULT']['HueApiKey'], room),
+            bridge_ip, config['HUE']['HueApiKey'], room),
         data=json.dumps(ct_bri))
     print("[turn_on_room] Room {} on.".format(room))
     sleep(1)
