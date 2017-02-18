@@ -17,7 +17,6 @@ users = dict(
 
 
 def ping_devices(users):
-    num_users = len(users)
     for user in users:
         device = users.get(user)
         print("[ping_devices] {}".format(device))

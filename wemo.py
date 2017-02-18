@@ -1,7 +1,6 @@
 # Wemo Insight Control
 
 from pathlib import Path
-from time import sleep
 import configparser
 import subprocess
 import requests

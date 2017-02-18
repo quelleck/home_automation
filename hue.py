@@ -2,14 +2,14 @@
 # RhytHUEm
 # Ethan Seyl 2016
 
-import configparser
+from pathlib import Path
+from time import sleep
 import logging.config
+import configparser
 import requests
 import json
 import os
 import re
-from time import sleep
-from pathlib import Path
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
 config = configparser.ConfigParser()
@@ -22,7 +22,6 @@ users = config['DEFAULT']['Users'].split(', ')
 rooms_list = config['DEFAULT']['Rooms'].split(' | ')
 room_numbers = list(data.keys())
 print("ROOM NUMBERS {}".format(room_numbers))
-#room_numbers = tuple(data.keys())
 room_names_list = []
 
 for room in rooms_list:
@@ -36,7 +35,6 @@ def number_for_user(user):
 
 
 def check_for_user(user):
-    # up_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
     user_file = Path("{}/users_home/{}_is.home".format(dir_path, user))
     if user_file.is_file():
         return True
@@ -73,11 +71,11 @@ def room_numbers_for_user(user_number):
     return room_numbers
 
 
-def turn_on_rooms_for_user(user, ct_bri):
+def turn_on_rooms_for_user(user):
     rooms = room_numbers_for_user(user)
     index = 0
     for room in rooms:
-        turn_on_room(room, ct_bri)
+        turn_on_room(room)
         print("[turn_on_rooms_for_user] User: {}".format(user))
         print("[turn_on_rooms_for_user] {} ON".format(room_names_list[user][
             index]))
@@ -147,6 +145,7 @@ def turn_off_or_on(room_numbers, off_on):
             print("[main] Room {} - Lights are already {}.".format(room_number,
                                                                    off_on))
 
+
 def set_all_users_home(users):
     users_home = []
     for user in users:
@@ -188,14 +187,18 @@ def main():
         rooms_to_remain_on = set(rooms_to_remain_on)
         print("[hue][main] Rooms to remain on: {}".format(rooms_to_remain_on))
 
-        rooms_to_turn_off = [room for room in room_numbers if room not in rooms_to_remain_on]
+        rooms_to_turn_off = [
+            room for room in room_numbers if room not in rooms_to_remain_on
+        ]
         rooms_to_turn_on = set(rooms_to_turn_on)
 
         print("[main] Rooms to turn on {}".format(rooms_to_turn_on))
 
         if rooms_to_turn_on:
             print("ROOMS ALREADY ON: {}".format(rooms_on))
-            rooms_to_turn_on = [room for room in rooms_to_turn_on if room not in rooms_on]
+            rooms_to_turn_on = [
+                room for room in rooms_to_turn_on if room not in rooms_on
+            ]
             print("ADJUSTED RTTO: {}".format(rooms_to_turn_on))
             if rooms_to_turn_on:
                 turn_off_or_on(rooms_to_turn_on, 'on')
@@ -208,7 +211,9 @@ def main():
 
         if rooms_to_turn_off:
             print("ROOMS ALREADY OFF: {}".format(rooms_off))
-            rooms_to_turn_off = [room for room in rooms_to_turn_off if room not in rooms_off]
+            rooms_to_turn_off = [
+                room for room in rooms_to_turn_off if room not in rooms_off
+            ]
             print("ADJUSTED RTTOFF: {}".format(rooms_to_turn_off))
             if rooms_to_turn_off:
                 turn_off_or_on(rooms_to_turn_off, 'off')

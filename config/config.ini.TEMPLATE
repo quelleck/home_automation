@@ -14,7 +14,7 @@ IFTTTApiKey =
 #[DEFAULT]
 #HueApiKey = MyHueBridgeUserKey
 #Users = John, Sally, Fred
-#Devices = AA:BB:CC:DD:EE:FF AA:BB:CC:DD:EE:FF AA:BB:CC:DD:EE:FF
+#Devices = AA:BB:CC:DD:EE:FF,AA:BB:CC:DD:EE:FF, AA:BB:CC:DD:EE:FF
 Rooms = Living Room, Bedroom | Hallway, Living Room, Bedroom | Kitchen, Office, Bedroom
 
 
