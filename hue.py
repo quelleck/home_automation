@@ -204,6 +204,7 @@ def main():
                 turn_off_or_on(rooms_to_turn_on, 'on')
                 rooms_on = rooms_on + rooms_to_turn_on
                 logging.debug('ROOMS TURNED ON: {}'.format(rooms_to_turn_on))
+                rooms_off = [room for room in rooms_to_turn_off if room not in rooms_on]
         else:
             logging.debug("[main] No rooms to turn on")
 
@@ -218,7 +219,7 @@ def main():
             if rooms_to_turn_off:
                 turn_off_or_on(rooms_to_turn_off, 'off')
                 rooms_on = [room for room in rooms_to_turn_on]
-                rooms_off = [room for room in rooms_to_turn_off]
+                rooms_off = [room for room in rooms_to_turn_off if room not in rooms_on]
         else:
             logging.debug("[main] No rooms to turn off")
         logging.debug("[main] Sleep...")
