@@ -20,13 +20,31 @@ data = requests.get('http://{}/api/{}/groups/'.format(bridge_ip, config[
     'HUE']['HueApiKey'])).json()
 users = config['DEFAULT']['Users'].split(', ')
 rooms_list = config['HUE']['Rooms'].split(' | ')
-room_numbers = list(data.keys())
-print("ROOM NUMBERS {}".format(room_numbers))
+room_and_group_numbers = list(data.keys())
+
 room_names_list = []
 
 for room in rooms_list:
     room = room.split(', ')
     room_names_list.append(room)
+
+room_numbers = []
+
+for number in room_and_group_numbers:
+    for users_rooms in room_names_list:
+        for room in users_rooms:
+            if data[number]['name'] == room:
+                print(data[number]['name'])
+                print(room)
+                room_numbers.append(number)
+                print("ADDED ROOM {}".format(room))
+            else:
+                print(data[number]['name'])
+                print(room)
+                print("[hue][room_numbers_not_light_groups] Group number not room: {} {}".format(number, room))
+room_numbers = set(room_numbers)
+
+print("ROOM NUMBERS {}".format(room_numbers))
 
 
 def number_for_user(user):
