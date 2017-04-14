@@ -173,8 +173,8 @@ def set_all_users_home(users):
 
 
 def main():
-    logging.debug("[main] Users = {}".format(users))
-    logging.debug("[main] Rooms = {}".format(room_names_list))
+    logging.debug("[hue][main] Users = {}".format(users))
+    logging.debug("[hue][main] Rooms = {}".format(room_names_list))
     blink_ready()
     rooms_on = []
     rooms_off = []
@@ -197,7 +197,7 @@ def main():
                     logging.debug("[hue][main] {} has left.".format(user_name))
                 else:
                     logging.debug("[hue][main] {} was already gone.".format(user_name))
-        logging.debug("USERS HOME: {}".format(users_home))
+        logging.debug("[hue][main] USERS HOME: {}".format(users_home))
 
         rooms_to_remain_on = []
         for user_num in users_home:
@@ -210,40 +210,40 @@ def main():
         ]
         rooms_to_turn_on = set(rooms_to_turn_on)
 
-        logging.debug("[main] Rooms to turn on {}".format(rooms_to_turn_on))
+        logging.debug("[hue][main] Rooms to turn on {}".format(rooms_to_turn_on))
 
         if rooms_to_turn_on:
-            logging.debug("ROOMS ALREADY ON: {}".format(rooms_on))
+            logging.debug("[hue][main] ROOMS ALREADY ON: {}".format(rooms_on))
             rooms_to_turn_on = [
                 room for room in rooms_to_turn_on if room not in rooms_on
             ]
-            logging.debug("ADJUSTED RTTO: {}".format(rooms_to_turn_on))
+            logging.debug("[hue][main] ADJUSTED RTTO: {}".format(rooms_to_turn_on))
             if rooms_to_turn_on:
                 turn_off_or_on(rooms_to_turn_on, 'on')
                 rooms_on = rooms_on + rooms_to_turn_on
-                logging.debug('ROOMS TURNED ON: {}'.format(rooms_to_turn_on))
+                logging.debug('[hue][main] ROOMS TURNED ON: {}'.format(rooms_to_turn_on))
                 rooms_off = [room for room in rooms_to_turn_off if room not in rooms_on]
         else:
-            logging.debug("[main] No rooms to turn on")
+            logging.debug("[hue][main] No rooms to turn on")
 
-        logging.debug("[main] Rooms to turn off {}".format(rooms_to_turn_off))
+        logging.debug("[hue][main] Rooms to turn off {}".format(rooms_to_turn_off))
 
         if rooms_to_turn_off:
-            logging.debug("ROOMS ALREADY OFF: {}".format(rooms_off))
+            logging.debug("[hue][main] ROOMS ALREADY OFF: {}".format(rooms_off))
             rooms_to_turn_off = [
                 room for room in rooms_to_turn_off if room not in rooms_off
             ]
-            logging.debug("ADJUSTED RTTOFF: {}".format(rooms_to_turn_off))
+            logging.debug("[hue][main] ADJUSTED RTTOFF: {}".format(rooms_to_turn_off))
             if rooms_to_turn_off:
                 turn_off_or_on(rooms_to_turn_off, 'off')
                 rooms_on = [room for room in rooms_to_turn_on]
                 rooms_off = [room for room in rooms_to_turn_off if room not in rooms_on]
         else:
-            logging.debug("[main] No rooms to turn off")
-        logging.debug("[main] Sleep...")
+            logging.debug("[hue][main] No rooms to turn off")
+        logging.debug("[hue][main] Sleep...")
         sleep(5)
 
 
 if __name__ == "__main__":
-    logging.config.fileConfig('{}/config/logging.conf'.format(dir_path))
+    logging.config.fileConfig('{}/config/hue_logging.conf'.format(dir_path))
     main()

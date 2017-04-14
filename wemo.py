@@ -55,5 +55,5 @@ def main():
 
 
 if __name__ == '__main__':
-    logging.config.fileConfig('{}/config/logging.conf'.format(dir_path))
+    logging.config.fileConfig('{}/config/wemo_logging.conf'.format(dir_path))
     main()

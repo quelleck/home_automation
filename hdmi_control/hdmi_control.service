@@ -1,0 +1,11 @@
+[Unit]
+Description=hdmi_control
+After=multi-user.target
+
+[Service]
+Type=idle
+#EDIT THE PATH TO YOUR HDMI_CONTROL.PY FILE
+ExecStart=/usr/bin/python3 /home/pi/home_automation/hdmi_control/hdmi_control.py
+
+[Install]
+WantedBy=multi-user.target

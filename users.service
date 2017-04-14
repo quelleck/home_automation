@@ -4,8 +4,8 @@ After=multi-user.target
 
 [Service]
 Type=idle
-#EDIT THE PATH TO YOUR RHYTHUEM DIRECTORY
-ExecStart=/usr/bin/python3 /home/pi/automation/users.py
+#EDIT THE PATH TO YOUR USERS.PY DIRECTORY
+ExecStart=/usr/bin/python3 /home/pi/home_automation/users.py
 
 [Install]
 WantedBy=multi-user.target
