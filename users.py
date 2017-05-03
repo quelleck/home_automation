@@ -24,7 +24,10 @@ users = dict(
     zip((config['DEFAULT']['Users'].split(', ')), (config['HUE']['Devices']
                                                    ).split(', ')))
 
-remote = config['DEFAULT']['Remote']
+if config['DEFAULT']['Remote'] == "True":
+    remote = True
+else:
+    remote = False
 
 
 def ping_devices(users):
