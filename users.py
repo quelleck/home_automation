@@ -24,6 +24,8 @@ users = dict(
     zip((config['DEFAULT']['Users'].split(', ')), (config['HUE']['Devices']
                                                    ).split(', ')))
 
+remote = config['DEFAULT']['Remote']
+
 
 def ping_devices(users):
     for user in users:
