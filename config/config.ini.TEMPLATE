@@ -1,6 +1,10 @@
 [DEFAULT]
 Users =
 Devices =
+Remote = False
+RemoteServer =
+RemoteUser =
+RemotePw =
 
 [HUE]
 HueApiKey =
