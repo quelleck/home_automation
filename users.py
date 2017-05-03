@@ -89,6 +89,7 @@ def create_file(user):
         if remote:
             client.connect(config['DEFAULT']['RemoteServer'], username=config['DEFAULT']['RemoteUser'], password=config['DEFAULT']['RemotePw'])
             client.exec_command('touch ~/home_automation/users_home/{}_is.home'.format(user))
+            client.close()
             logging.debug("[users][create_file] {} file created remotely.".format(user))
         else:
             open('{}/users_home/{}_is.home'.format(dir_path, user), 'w+b')
@@ -101,6 +102,7 @@ def delete_file(user):
             try:
                 client.connect(config['DEFAULT']['RemoteServer'], username=config['DEFAULT']['RemoteUser'], password=config['DEFAULT']['RemotePw'])
                 client.exec_command('rm ~/home_automation/users_home/{}_is.home'.format(user))
+                client.close()
                 logging.debug("[users][create_file] {} file created remotely.".format(user))
             except Exception as e:
                 logging.debug("[users][delete_file] Remote: {}".format(str(e)))
