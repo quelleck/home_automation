@@ -20,23 +20,23 @@ EcobeeApiKey =
 EcobeeRefreshToken =
 
 #EXAMPLE VALUES
-[DEFAULT]
-Users = Jane, John
-Devices = AA:BB:CC:DD:EE:FF, FF:EE:DD:CC:BB:AA
-Remote = False
-RemoteServer =
-RemoteUser =
-RemotePw =
+#[DEFAULT]
+#Users = Jane, John
+#Devices = AA:BB:CC:DD:EE:FF, FF:EE:DD:CC:BB:AA
+#Remote = False
+#RemoteServer =
+#RemoteUser =
+#RemotePw =
 
-[HUE]
-HueApiKey = BridgeAPIKey
-Rooms = Living Room, Bedroom | Kitchen, Living Room, Bedroom
+#[HUE]
+#HueApiKey = BridgeAPIKey
+#Rooms = Living Room, Bedroom | Kitchen, Living Room, Bedroom
 
-[WEMO]
-On = my_ifttt_applet
-Off = MyIFTTTApiKey
-IFTTTApiKey =
+#[WEMO]
+#On = my_ifttt_applet
+#Off = MyIFTTTApiKey
+#IFTTTApiKey =
 
-[ECOBEE3]
-EcobeeApiKey = EcobeeApiKey
-EcobeeRefreshToken = EcobeeRefreshToken
+#[ECOBEE3]
+#EcobeeApiKey = EcobeeApiKey
+#EcobeeRefreshToken = EcobeeRefreshToken
