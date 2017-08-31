@@ -7,7 +7,6 @@ from time import sleep
 import logging.config
 import configparser
 import subprocess
-import base64
 import paramiko
 import os
 
@@ -21,7 +20,7 @@ client.load_system_host_keys()
 client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 
 users = dict(
-    zip((config['DEFAULT']['Users'].split(', ')), (config['HUE']['Devices']
+    zip((config['DEFAULT']['Users'].split(', ')), (config['DEFAULT']['Devices']
                                                    ).split(', ')))
 
 if config['DEFAULT']['Remote'] == "True":
