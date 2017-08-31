@@ -1,7 +1,7 @@
 [DEFAULT]
 Users =
 Devices =
-Remote =
+Remote = False
 RemoteServer =
 RemoteUser =
 RemotePw =
